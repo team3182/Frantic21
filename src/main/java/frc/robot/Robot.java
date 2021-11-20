@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
+  private Servo servo1;
+
   /**
    * This function is run when the robot is first started up and should be used
    * for any initialization code.
@@ -31,6 +34,8 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    servo1 = new Servo(5);
   }
 
   /**
@@ -99,6 +104,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+    if (m_robotContainer.m_controller.controller.getRawButton(11)) {
+      servo1.set(0.9);
+    } else {
+      servo1.set(0.1);
+    }
   }
 
   @Override
